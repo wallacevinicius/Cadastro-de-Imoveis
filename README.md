@@ -5,7 +5,7 @@ Programa constrido na linguagem C destinado para o primeiro projeto da disciplin
 ### Como compilar no Linux
 
 ```sh
-$ cd Caminho da pasta onde está o projeto
+$ cd Caminho da pasta onde está o projeto (Ex: Desktop/Cadastro-de-Imoveis)
 $ gcc index.c consulta.c cadastro.c menu.c clear.c -o exe
 $ ./exe
 ```
