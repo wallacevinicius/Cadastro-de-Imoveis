@@ -23,6 +23,7 @@ typedef struct{
 }tTerreno;
 
 typedef struct{
+	char titulo[Qt];
 	char rua[Qt];
 	int numero;
 	char bairro[Qt];
