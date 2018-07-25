@@ -68,6 +68,10 @@ void CadastroImoveis(tImovel imovel, FILE *arquivo){
 			printf("\n\t----------------------------------------------------------------------------------\n");
 			printf("\t|\t\t\t\tCadastro de Casa \t\t\t\t |\n");
 			printf("\t----------------------------------------------------------------------------------\n");
+			printf("\tDigite o título da Casa: ");
+			getchar();
+			fgets(imovel.titulo, Qt, stdin);
+			StringMaiusculo(imovel.titulo, strlen(imovel.titulo));
 			printf("\tDigite a quantidade de quartos: ");
 			scanf("%d", &imovel.casa.quartos);
 			printf("\tDigite a quantidade de andares: ");
@@ -81,6 +85,10 @@ void CadastroImoveis(tImovel imovel, FILE *arquivo){
 			printf("\n\t----------------------------------------------------------------------------------\n");
 			printf("\t|\t\t\t\tCadastro de Apartamento \t\t\t |\n");
 			printf("\t----------------------------------------------------------------------------------\n");
+			printf("\tDigite o título do Apartamento: ");
+			getchar();
+			fgets(imovel.titulo, Qt, stdin);
+			StringMaiusculo(imovel.titulo, strlen(imovel.titulo));
 			printf("\tDigite o andar do apartamento: ");
 			scanf("%d", &imovel.ap.andar);
 			printf("\tDigite a quantidade de quartos: ");
@@ -100,6 +108,10 @@ void CadastroImoveis(tImovel imovel, FILE *arquivo){
 			printf("\n\t----------------------------------------------------------------------------------\n");
 			printf("\t|\t\t\t\tCadastro de Terreno \t\t\t\t |\n");
 			printf("\t----------------------------------------------------------------------------------\n");
+			printf("\tDigite o título do Terreno: ");
+			getchar();
+			fgets(imovel.titulo, Qt, stdin);
+			StringMaiusculo(imovel.titulo, strlen(imovel.titulo));
 			printf("\tDigite a área do terreno: ");
 			scanf("%lf", &imovel.ter.area);
 			break;
