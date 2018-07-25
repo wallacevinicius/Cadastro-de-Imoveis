@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include "cadastro.h"
+#include "clear.h"
 
 void StringMaiusculo(char frase[], size_t tamanho){
 	int i;
@@ -13,6 +13,7 @@ void StringMaiusculo(char frase[], size_t tamanho){
 }
 
 void CadastroImoveis(tImovel imovel, FILE *arquivo){
+	Clear();
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\t\t\t\t\t Informações do Imóvel\n");
 	printf("\t----------------------------------------------------------------------------------\n");
@@ -36,34 +37,31 @@ void CadastroImoveis(tImovel imovel, FILE *arquivo){
 	printf("\tDigite o CEP do imóvel: ");
 	fgets(imovel.cep, Qt, stdin);
 	StringMaiusculo(imovel.cep, strlen(imovel.cep));
-	system("cls");
-    	system("clear");
+	Clear();
 
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\tTipo da Transação\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
-	printf("\t|\t1. Aluguel\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t2. Venda\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[1] Aluguel\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[2] Venda\t\t\t\t\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tDigite sua opção: ");
 	scanf("%d%*c", &imovel.transacao);
 	//Preço
 	printf("\tPreço do imóvel: ");
 	scanf("%lf%*c", &imovel.valor);
-	system("cls");
-    	system("clear");
+	Clear();
 
     	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\t\tTipo do Imóvel\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
-	printf("\t|\t1. Casa\t\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t2. Apartamento\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t3. Terreno\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[1] Casa\t\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[2] Apartamento\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[3] Terreno\t\t\t\t\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tDigite sua opção: ");
 	scanf("%d", &imovel.tipo);
-	system("cls");
-    	system("clear");
+	Clear();
 
 	switch(imovel.tipo){
 		case 1:

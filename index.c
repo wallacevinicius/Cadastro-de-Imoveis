@@ -5,6 +5,7 @@
 #include "menu.h"
 #include "cadastro.h"
 #include "consulta.h"
+#include "clear.h"
 
 int main(int argc, char const *argv[])
 {
@@ -16,10 +17,10 @@ int main(int argc, char const *argv[])
 		printf("Erro ao abrir o arquivo\n");
 	}
 	
-	int opcao, consulta;
+	int opcao = 1, consulta;
 	tImovel imovel;
 
-	while(1){
+	while(opcao){
 		opcao = Menu();
 
 		if(opcao == 0)
@@ -27,13 +28,9 @@ int main(int argc, char const *argv[])
 
 		switch(opcao){
 			case 1:
-				system("cls");
-				system("clear");
 				CadastroImoveis(imovel, arquivo);
 				break;
 			case 2:
-				system("cls");
-				system("clear");
 				consulta = MenuConsulta();
 				switch(consulta){
 					case 1:
@@ -59,7 +56,17 @@ int main(int argc, char const *argv[])
 						break;
 				}
 		}
+		printf("\n\n\t---------------------------- O que deseja fazer agora? ---------------------------\n");
+		printf("\t|\t\t\t\t\t\t\t\t\t\t |\n");
+		printf("\t|\t[1] Voltar ao Menu \t\t\t\t\t\t\t |\n");
+		printf("\t|\t[0] Encerrar Programa \t\t\t\t\t\t\t |\n");
+		printf("\t|\t\t\t\t\t\t\t\t\t\t |\n");
+		printf("\t----------------------------------------------------------------------------------\n");
+		printf("\tDigite sua opção: ");
+		scanf("%d", &opcao);
+		Clear();
 
+		fseek(arquivo, 0 ,SEEK_SET);
 	}
 
 	fclose(arquivo);

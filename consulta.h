@@ -11,8 +11,8 @@ void DescricaoApartamento(tImovel imovel, FILE *arquivo);
 void DescricaoTerreno(tImovel imovel, FILE *arquivo);
 void ConsultaVendaTipo(tImovel imovel, FILE *arquivo);
 void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo);
-void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo);
 void ConsultaVendaBairro(tImovel imovel, FILE *arquivo);
+void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo);
 void TodosCidade(tImovel imovel, FILE *arquivo);
 
 #endif

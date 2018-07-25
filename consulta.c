@@ -1,9 +1,8 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 #include "cadastro.h"
 #include "consulta.h"
+#include "clear.h"
 
 void Consulta(tImovel imovel, FILE *arquivo){
 	if(imovel.tipo == 1){
@@ -20,32 +19,39 @@ void Consulta(tImovel imovel, FILE *arquivo){
 		printf("\t----------------------------------------------------------------------------------\n");
 	}
 	if(imovel.transacao == 1){
-		printf("\tImóvel disponivel para ALUGUEL\n");
+		printf("\t| Imóvel disponivel para ALUGUEL\t\t\t\t\t\t\t |\n");
 	}else if(imovel.transacao == 2){
-		printf("\tImóvel disponivel para VENDA\n");
+		printf("\t| Imóvel disponivel para VENDA\t\t\t\t\t\t\t |\n");
 	}
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tEndereço: %s", imovel.rua);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tNúmero: %d\n", imovel.numero);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tCidade: %s", imovel.cidade);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tBairro: %s", imovel.bairro);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tCEP: %s",imovel.cep);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tPreço: R$ %.2lf\n", imovel.valor);
 }
 
 void TodosImoveis(tImovel imovel, FILE *arquivo){
+	int count = 0;
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		Consulta(imovel, arquivo);
+		printf("\t----------------------------------------------------------------------------------\n\n");
 		puts("");
+		count++;
 	}
+
+	if(count > 1){
+		printf("\n\n\tForam encontrados %d resultados\n", count);
+	}else if(count == 1){
+		printf("\n\n\tFoi encontrado 1 resultado!\n");
+	}else if(count == 0){
+		printf("\n\n\tNão foi encontrado nenhum resultado!\n");
+	}	
 }
 
 void TodosImoveisDesc(tImovel imovel, FILE *arquivo){
+	int count = 0;
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		Consulta(imovel, arquivo);
 		switch(imovel.tipo){
@@ -60,6 +66,15 @@ void TodosImoveisDesc(tImovel imovel, FILE *arquivo){
 				break;
 		}
 		puts("");
+		count++;
+	}
+
+	if(count > 1){
+		printf("\n\n\tForam encontrados %d resultados\n", count);
+	}else if(count == 1){
+		printf("\n\n\tFoi encontrado 1 resultado!\n");
+	}else if(count == 0){
+		printf("\n\n\tNão foi encontrado nenhum resultado!\n");
 	}
 }
 
@@ -68,15 +83,10 @@ void ConsultaCasa(tImovel imovel, FILE *arquivo){
 	printf("\t|\t\t\t\t\tCasa \t\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tEndereço: %s", imovel.rua);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tNúmero: %d\n", imovel.numero);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tCidade: %s", imovel.cidade);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tBairro: %s", imovel.bairro);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tCEP: %s",imovel.cep);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tPreço: R$ %.2lf\n", imovel.valor);
 }
 
@@ -85,15 +95,10 @@ void ConsultaAp(tImovel imovel, FILE *arquivo){
 	printf("\t|\t\t\t\t     Apartamento \t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tEndereço: %s", imovel.rua);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tNúmero: %d\n", imovel.numero);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tCidade: %s", imovel.cidade);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tBairro: %s", imovel.bairro);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tCEP: %s",imovel.cep);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tPreço: R$ %.2lf\n", imovel.valor);
 }
 
@@ -102,59 +107,45 @@ void ConsultaTer(tImovel imovel, FILE *arquivo){
 	printf("\t|\t\t\t\t       Terreno \t\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tEndereço: %s", imovel.rua);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tNúmero: %d\n", imovel.numero);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tCidade: %s", imovel.cidade);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tBairro: %s", imovel.bairro);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tCEP: %s",imovel.cep);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tPreço: R$ %.2lf\n", imovel.valor);
 }
 
 void DescricaoCasa(tImovel imovel, FILE *arquivo){
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tNúmero de Quartos: %d\n", imovel.casa.quartos);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tNúmero de Andares: %d\n", imovel.casa.andares);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tÁrea do Terreno: %.2lfm\n", imovel.casa.areaTer);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tÀrea Construida: %.2lfm\n", imovel.casa.areaConst);
+	printf("\t----------------------------------------------------------------------------------\n\n");
 }
 
 void DescricaoApartamento(tImovel imovel, FILE *arquivo){
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tPreço do Condomínio: %.2lf\n", imovel.ap.condominio);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tNúmero de Quartos: %d\n", imovel.ap.quartos);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tAndar do Apartamento: %d\n", imovel.ap.andar);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tNúmero de Garagens: %d\n", imovel.ap.garagens);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tPosição do Apartamento: %s", imovel.ap.posicao);
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tÁrea do Apartamento: %.2lfm\n", imovel.ap.area);
+	printf("\t----------------------------------------------------------------------------------\n\n");
 }
 
 void DescricaoTerreno(tImovel imovel, FILE *arquivo){
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tÁrea do Terreno: %.2lfm\n", imovel.ter.area);
+	printf("\t----------------------------------------------------------------------------------\n\n");
 }
 
 void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo){
-	system("cls");
-	system("clear");
+	Clear();
 	int tipoImovel, count = 0;
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t     Imóveis a ALUGUEL por TIPO (Casa, Apartamento, Terreno) \t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
-	printf("\t|\t1. Casa\t\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t2. Apartamento\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t3. Terreno\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[1] Casa\t\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[2] Apartamento\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[3] Terreno\t\t\t\t\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tDigite sua opção: ");
 	scanf("%d", &tipoImovel);
@@ -187,15 +178,14 @@ void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo){
 }
 
 void ConsultaVendaTipo(tImovel imovel, FILE *arquivo){
-	system("cls");
-	system("clear");
-	int tipoImovel, count;
+	Clear();
+	int tipoImovel, count = 0;
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t     Imóveis a VENDA por TIPO (Casa, Apartamento, Terreno) \t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
-	printf("\t|\t1. Casa\t\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t2. Apartamento\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t2. Terreno\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[1] Casa\t\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[2] Apartamento\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t[3] Terreno\t\t\t\t\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tDigite sua opção: ");
 	scanf("%d", &tipoImovel);
@@ -228,8 +218,7 @@ void ConsultaVendaTipo(tImovel imovel, FILE *arquivo){
 }
 
 void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo){
-	system("cls");
-	system("clear");
+	Clear();
 	int count = 0, tipo;
 	char bairro[Qt];
 	printf("\n\t----------------------------------------------------------------------------------\n");
@@ -268,8 +257,7 @@ void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo){
 }
 
 void ConsultaVendaBairro(tImovel imovel, FILE *arquivo){
-	system("cls");
-	system("clear");
+	Clear();
 	int count = 0, tipo;
 	char bairro[Qt];
 	printf("\n\t----------------------------------------------------------------------------------\n");
@@ -308,8 +296,7 @@ void ConsultaVendaBairro(tImovel imovel, FILE *arquivo){
 }
 
 void TodosCidade(tImovel imovel, FILE *arquivo){
-	system("cls");
-	system("clear");
+	Clear();
 	int count = 0, tipo;
 	char cidade[Qt];
 	printf("\n\t----------------------------------------------------------------------------------\n");
