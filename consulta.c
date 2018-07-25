@@ -24,6 +24,7 @@ void Consulta(tImovel imovel, FILE *arquivo){
 		printf("\t| Imóvel disponivel para VENDA\t\t\t\t\t\t\t |\n");
 	}
 	printf("\t----------------------------------------------------------------------------------\n");
+	printf("\tTítulo do Imóvel: %s", imovel.titulo);
 	printf("\tEndereço: %s", imovel.rua);
 	printf("\tNúmero: %d\n", imovel.numero);
 	printf("\tCidade: %s", imovel.cidade);
@@ -47,7 +48,7 @@ void TodosImoveis(tImovel imovel, FILE *arquivo){
 		printf("\n\n\tFoi encontrado 1 resultado!\n");
 	}else if(count == 0){
 		printf("\n\n\tNão foi encontrado nenhum resultado!\n");
-	}	
+	}
 }
 
 void TodosImoveisDesc(tImovel imovel, FILE *arquivo){
@@ -82,6 +83,7 @@ void ConsultaCasa(tImovel imovel, FILE *arquivo){
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\t\tCasa \t\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
+	printf("\tTítulo do Imóvel: %s", imovel.titulo);
 	printf("\tEndereço: %s", imovel.rua);
 	printf("\tNúmero: %d\n", imovel.numero);
 	printf("\tCidade: %s", imovel.cidade);
@@ -94,6 +96,7 @@ void ConsultaAp(tImovel imovel, FILE *arquivo){
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\t     Apartamento \t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
+	printf("\tTítulo do Imóvel: %s", imovel.titulo);
 	printf("\tEndereço: %s", imovel.rua);
 	printf("\tNúmero: %d\n", imovel.numero);
 	printf("\tCidade: %s", imovel.cidade);
@@ -106,6 +109,7 @@ void ConsultaTer(tImovel imovel, FILE *arquivo){
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\t       Terreno \t\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
+	printf("\tTítulo do Imóvel: %s", imovel.titulo);
 	printf("\tEndereço: %s", imovel.rua);
 	printf("\tNúmero: %d\n", imovel.numero);
 	printf("\tCidade: %s", imovel.cidade);
@@ -151,6 +155,7 @@ void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo){
 	scanf("%d", &tipoImovel);
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(imovel.tipo == tipoImovel && imovel.transacao == 1){
+/*
 			if(imovel.tipo == 1){
 				ConsultaCasa(imovel,arquivo);
 				DescricaoCasa(imovel, arquivo);
@@ -160,6 +165,21 @@ void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo){
 			}else if(imovel.tipo == 3){
 				ConsultaTer(imovel, arquivo);
 				DescricaoApartamento(imovel, arquivo);
+			}
+*/
+			switch(imovel.tipo){
+                case 1:
+                    ConsultaCasa(imovel, arquivo);
+                    DescricaoCasa(imovel, arquivo);
+                    break;
+                case 2:
+                    ConsultaAp(imovel, arquivo);
+                    DescricaoApartamento(imovel, arquivo);
+                    break;
+                case 3:
+                    ConsultaTer(imovel, arquivo);
+                    DescricaoTerreno(imovel, arquivo);
+                    break;
 			}
 
 			count++;
@@ -191,6 +211,7 @@ void ConsultaVendaTipo(tImovel imovel, FILE *arquivo){
 	scanf("%d", &tipoImovel);
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(imovel.tipo == tipoImovel && imovel.transacao == 2){
+/*
 			if(imovel.tipo == 1){
 				ConsultaCasa(imovel,arquivo);
 				DescricaoCasa(imovel, arquivo);
@@ -200,6 +221,22 @@ void ConsultaVendaTipo(tImovel imovel, FILE *arquivo){
 			}else if(imovel.tipo == 3){
 				ConsultaTer(imovel, arquivo);
 				DescricaoApartamento(imovel, arquivo);
+			}
+*/
+
+            switch(imovel.tipo){
+                case 1:
+                    ConsultaCasa(imovel, arquivo);
+                    DescricaoCasa(imovel, arquivo);
+                    break;
+                case 2:
+                    ConsultaAp(imovel, arquivo);
+                    DescricaoApartamento(imovel, arquivo);
+                    break;
+                case 3:
+                    ConsultaTer(imovel, arquivo);
+                    DescricaoTerreno(imovel, arquivo);
+                    break;
 			}
 
 			count++;
@@ -230,6 +267,7 @@ void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo){
 	StringMaiusculo(bairro, strlen(bairro));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(!strcmp(imovel.bairro, bairro) && imovel.transacao == 1){
+/*
 			if(imovel.tipo == 1){
 				ConsultaCasa(imovel,arquivo);
 				DescricaoCasa(imovel, arquivo);
@@ -239,6 +277,21 @@ void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo){
 			}else if(imovel.tipo == 3){
 				ConsultaTer(imovel, arquivo);
 				DescricaoApartamento(imovel, arquivo);
+			}
+*/
+            switch(imovel.tipo){
+                case 1:
+                    ConsultaCasa(imovel, arquivo);
+                    DescricaoCasa(imovel, arquivo);
+                    break;
+                case 2:
+                    ConsultaAp(imovel, arquivo);
+                    DescricaoApartamento(imovel, arquivo);
+                    break;
+                case 3:
+                    ConsultaTer(imovel, arquivo);
+                    DescricaoTerreno(imovel, arquivo);
+                    break;
 			}
 
 			count++;
@@ -269,6 +322,7 @@ void ConsultaVendaBairro(tImovel imovel, FILE *arquivo){
 	StringMaiusculo(bairro, strlen(bairro));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(!strcmp(imovel.bairro, bairro) && imovel.transacao == 2){
+/*
 			if(imovel.tipo == 1){
 				ConsultaCasa(imovel,arquivo);
 				DescricaoCasa(imovel, arquivo);
@@ -278,6 +332,21 @@ void ConsultaVendaBairro(tImovel imovel, FILE *arquivo){
 			}else if(imovel.tipo == 3){
 				ConsultaTer(imovel, arquivo);
 				DescricaoApartamento(imovel, arquivo);
+			}
+*/
+            switch(imovel.tipo){
+                case 1:
+                    ConsultaCasa(imovel, arquivo);
+                    DescricaoCasa(imovel, arquivo);
+                    break;
+                case 2:
+                    ConsultaAp(imovel, arquivo);
+                    DescricaoApartamento(imovel, arquivo);
+                    break;
+                case 3:
+                    ConsultaTer(imovel, arquivo);
+                    DescricaoTerreno(imovel, arquivo);
+                    break;
 			}
 
 			count++;
@@ -308,6 +377,7 @@ void TodosCidade(tImovel imovel, FILE *arquivo){
 	StringMaiusculo(cidade, strlen(cidade));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(!strcmp(imovel.cidade, cidade)){
+/*
 			if(imovel.tipo == 1){
 				ConsultaCasa(imovel,arquivo);
 				DescricaoCasa(imovel, arquivo);
@@ -317,6 +387,21 @@ void TodosCidade(tImovel imovel, FILE *arquivo){
 			}else if(imovel.tipo == 3){
 				ConsultaTer(imovel, arquivo);
 				DescricaoApartamento(imovel, arquivo);
+			}
+*/
+            switch(imovel.tipo){
+                case 1:
+                    ConsultaCasa(imovel, arquivo);
+                    DescricaoCasa(imovel, arquivo);
+                    break;
+                case 2:
+                    ConsultaAp(imovel, arquivo);
+                    DescricaoApartamento(imovel, arquivo);
+                    break;
+                case 3:
+                    ConsultaTer(imovel, arquivo);
+                    DescricaoTerreno(imovel, arquivo);
+                    break;
 			}
 
 			count++;
