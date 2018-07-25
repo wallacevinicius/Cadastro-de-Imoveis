@@ -29,7 +29,7 @@ int MenuConsulta(){
 	printf("\t|\t4. Imóveis para ALUGUEL por TIPO (Casa, Apartamento, Terreno) \t\t |\n");
 	printf("\t|\t5. Imóveis para VENDA por BAIRRO \t\t\t\t\t |\n");
 	printf("\t|\t6. Imóveis para ALUGUEL por BAIRRO \t\t\t\t\t |\n");
-	printf("\t|\t6. Todos os Imóveis por CIDADE \t\t\t\t\t\t |\n");
+	printf("\t|\t7. Todos os Imóveis por CIDADE \t\t\t\t\t\t |\n");
 	printf("\t|\t\t\t\t\t\t\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tDigite sua opção: ");

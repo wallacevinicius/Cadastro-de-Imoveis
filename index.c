@@ -48,8 +48,16 @@ int main(int argc, char const *argv[])
 					case 4:
 						ConsultaAluguelTipo(imovel, arquivo);
 						break;
+					case 5:
+						ConsultaVendaBairro(imovel, arquivo);
+						break;
+					case 6:
+						ConsultaAluguelBairro(imovel, arquivo);
+						break;
+					case 7:
+						TodosCidade(imovel, arquivo);
+						break;
 				}
-				break;
 		}
 
 	}

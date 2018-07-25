@@ -19,9 +19,9 @@ void Consulta(tImovel imovel, FILE *arquivo){
 		printf("\t|\t\t\t\t       Terreno \t\t\t\t\t |\n");
 		printf("\t----------------------------------------------------------------------------------\n");
 	}
-	if(imovel.tipo == 1){
+	if(imovel.transacao == 1){
 		printf("\tImóvel disponivel para ALUGUEL\n");
-	}else if(imovel.tipo == 2){
+	}else if(imovel.transacao == 2){
 		printf("\tImóvel disponivel para VENDA\n");
 	}
 	printf("\t----------------------------------------------------------------------------------\n");
@@ -145,10 +145,51 @@ void DescricaoTerreno(tImovel imovel, FILE *arquivo){
 	printf("\tÁrea do Terreno: %.2lfm\n", imovel.ter.area);
 }
 
+void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo){
+	system("cls");
+	system("clear");
+	int tipoImovel, count = 0;
+	printf("\n\t----------------------------------------------------------------------------------\n");
+	printf("\t|\t     Imóveis a ALUGUEL por TIPO (Casa, Apartamento, Terreno) \t\t |\n");
+	printf("\t----------------------------------------------------------------------------------\n");
+	printf("\t|\t1. Casa\t\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t2. Apartamento\t\t\t\t\t\t\t\t |\n");
+	printf("\t|\t3. Terreno\t\t\t\t\t\t\t\t |\n");
+	printf("\t----------------------------------------------------------------------------------\n");
+	printf("\tDigite sua opção: ");
+	scanf("%d", &tipoImovel);
+	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
+		if(imovel.tipo == tipoImovel && imovel.transacao == 1){
+			if(imovel.tipo == 1){
+				ConsultaCasa(imovel,arquivo);
+				DescricaoCasa(imovel, arquivo);
+			}else if(imovel.tipo == 2){
+				ConsultaAp(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}else if(imovel.tipo == 3){
+				ConsultaTer(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}
+
+			count++;
+		}
+
+		if(feof(arquivo)) break;
+	}
+
+	if(count > 1){
+		printf("\n\n\tForam encontrados %d resultados\n", count);
+	}else if(count == 1){
+		printf("\n\n\tFoi encontrado 1 resultado!\n");
+	}else if(count == 0){
+		printf("\n\n\tNão foi encontrado nenhum resultado!\n");
+	}
+}
+
 void ConsultaVendaTipo(tImovel imovel, FILE *arquivo){
 	system("cls");
 	system("clear");
-	int tipoImovel;
+	int tipoImovel, count;
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t     Imóveis a VENDA por TIPO (Casa, Apartamento, Terreno) \t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
@@ -160,51 +201,148 @@ void ConsultaVendaTipo(tImovel imovel, FILE *arquivo){
 	scanf("%d", &tipoImovel);
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(imovel.tipo == tipoImovel && imovel.transacao == 2){
-			switch(tipoImovel){
-				case 1:
-					DescricaoCasa(imovel, arquivo);
-					break;
-				case 2:
-					DescricaoApartamento(imovel, arquivo);
-					break;
-				case 3:
-					DescricaoTerreno(imovel, arquivo);
-					break;
+			if(imovel.tipo == 1){
+				ConsultaCasa(imovel,arquivo);
+				DescricaoCasa(imovel, arquivo);
+			}else if(imovel.tipo == 2){
+				ConsultaAp(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}else if(imovel.tipo == 3){
+				ConsultaTer(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
 			}
+
+			count++;
 		}
 
-		if(feof(arquivo)){
-			break;
-		}
+		if(feof(arquivo)) break;
+	}
+
+	if(count > 1){
+		printf("\n\n\tForam encontrados %d resultados\n", count);
+	}else if(count == 1){
+		printf("\n\n\tFoi encontrado 1 resultado!\n");
+	}else if(count == 0){
+		printf("\n\n\tNão foi encontrado nenhum resultado!\n");
 	}
 }
 
-void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo){
+void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo){
 	system("cls");
 	system("clear");
-	int tipoImovel;
+	int count = 0, tipo;
+	char bairro[Qt];
 	printf("\n\t----------------------------------------------------------------------------------\n");
-	printf("\t|\t     Imóveis a ALUGUEL por TIPO (Casa, Apartamento, Terreno) \t\t |\n");
+	printf("\t|\t\t\t     Imóveis a ALUGUEL por BAIRRO \t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
-	printf("\t|\t1. Casa\t\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t2. Apartamento\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t2. Terreno\t\t\t\t\t\t\t\t |\n");
-	printf("\t----------------------------------------------------------------------------------\n");
-	printf("\tDigite sua opção: ");
-	scanf("%d", &tipoImovel);
+	printf("\tDigite o bairro: ");
+	getchar();
+	fgets(bairro, Qt, stdin);
+	StringMaiusculo(bairro, strlen(bairro));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
-		if(imovel.tipo == tipoImovel && imovel.transacao == 1){
-			switch(tipoImovel){
-				case 1:
-					DescricaoCasa(imovel, arquivo);
-					break;
-				case 2:
-					DescricaoApartamento(imovel, arquivo);
-					break;
-				case 3:
-					DescricaoTerreno(imovel, arquivo);
-					break;
+		if(!strcmp(imovel.bairro, bairro) && imovel.transacao == 1){
+			if(imovel.tipo == 1){
+				ConsultaCasa(imovel,arquivo);
+				DescricaoCasa(imovel, arquivo);
+			}else if(imovel.tipo == 2){
+				ConsultaAp(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}else if(imovel.tipo == 3){
+				ConsultaTer(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
 			}
+
+			count++;
 		}
+
+		if(feof(arquivo)) break;
+	}
+
+	if(count > 1){
+		printf("\n\n\tForam encontrados %d resultados\n", count);
+	}else if(count == 1){
+		printf("\n\n\tFoi encontrado 1 resultado!\n");
+	}else if(count == 0){
+		printf("\n\n\tNão foi encontrado nenhum resultado!\n");
+	}
+}
+
+void ConsultaVendaBairro(tImovel imovel, FILE *arquivo){
+	system("cls");
+	system("clear");
+	int count = 0, tipo;
+	char bairro[Qt];
+	printf("\n\t----------------------------------------------------------------------------------\n");
+	printf("\t|\t\t\t     Imóveis a VENDA por BAIRRO \t\t\t |\n");
+	printf("\t----------------------------------------------------------------------------------\n");
+	printf("\tDigite o bairro: ");
+	getchar();
+	fgets(bairro, Qt, stdin);
+	StringMaiusculo(bairro, strlen(bairro));
+	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
+		if(!strcmp(imovel.bairro, bairro) && imovel.transacao == 2){
+			if(imovel.tipo == 1){
+				ConsultaCasa(imovel,arquivo);
+				DescricaoCasa(imovel, arquivo);
+			}else if(imovel.tipo == 2){
+				ConsultaAp(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}else if(imovel.tipo == 3){
+				ConsultaTer(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}
+
+			count++;
+		}
+
+		if(feof(arquivo)) break;
+	}
+
+	if(count > 1){
+		printf("\n\n\tForam encontrados %d resultados\n", count);
+	}else if(count == 1){
+		printf("\n\n\tFoi encontrado 1 resultado!\n");
+	}else if(count == 0){
+		printf("\n\n\tNão foi encontrado nenhum resultado!\n");
+	}
+}
+
+void TodosCidade(tImovel imovel, FILE *arquivo){
+	system("cls");
+	system("clear");
+	int count = 0, tipo;
+	char cidade[Qt];
+	printf("\n\t----------------------------------------------------------------------------------\n");
+	printf("\t|\t\t\t     Imóveis disponíveis por CIDADE \t\t\t |\n");
+	printf("\t----------------------------------------------------------------------------------\n");
+	printf("\tDigite a cidade: ");
+	getchar();
+	fgets(cidade, Qt, stdin);
+	StringMaiusculo(cidade, strlen(cidade));
+	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
+		if(!strcmp(imovel.cidade, cidade)){
+			if(imovel.tipo == 1){
+				ConsultaCasa(imovel,arquivo);
+				DescricaoCasa(imovel, arquivo);
+			}else if(imovel.tipo == 2){
+				ConsultaAp(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}else if(imovel.tipo == 3){
+				ConsultaTer(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}
+
+			count++;
+		}
+
+		if(feof(arquivo)) break;
+	}
+
+	if(count > 1){
+		printf("\n\n\tForam encontrados %d resultados\n", count);
+	}else if(count == 1){
+		printf("\n\n\tFoi encontrado 1 resultado!\n");
+	}else if(count == 0){
+		printf("\n\n\tNão foi encontrado nenhum resultado!\n");
 	}
 }
