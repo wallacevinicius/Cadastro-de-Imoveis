@@ -42,22 +42,30 @@ void CadastroImoveis(tImovel imovel, FILE *arquivo){
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\tTipo da Transação\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
-	printf("\t|\t[1] Aluguel\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t[2] Venda\t\t\t\t\t\t\t\t |\n");
+	printf("\n");
+	printf("\t\t[1] Aluguel\n");
+	printf("\t\t[2] Venda\n");
+	printf("\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tDigite sua opção: ");
 	scanf("%d%*c", &imovel.transacao);
 	//Preço
-	printf("\tPreço do imóvel: ");
-	scanf("%lf%*c", &imovel.valor);
+	if(imovel.transacao == 1){
+		printf("\tPreço do alugel: ");
+		scanf("%lf%*c", &imovel.valor);
+	}else if(imovel.transacao == 2){
+		printf("\tPreço da venda: ");
+		scanf("%lf%*c", &imovel.valor);
+	}
 	Clear();
 
     	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\t\tTipo do Imóvel\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
-	printf("\t|\t[1] Casa\t\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t[2] Apartamento\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t[3] Terreno\t\t\t\t\t\t\t\t |\n");
+	printf("\t\t[1] Casa\n");
+	printf("\t\t[2] Apartamento\n");
+	printf("\t\t[3] Terreno\n");
+	printf("\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tDigite sua opção: ");
 	scanf("%d", &imovel.tipo);
@@ -119,7 +127,7 @@ void CadastroImoveis(tImovel imovel, FILE *arquivo){
 			printf("Escolha inválida!\n");
 	}
 
-	puts("\tCadastro efetuado com sucesso!");
+	printf("\n\n\t\aCadastro efetuado com sucesso!");
 
 	fwrite(&imovel, sizeof(imovel), 1, arquivo);
 }

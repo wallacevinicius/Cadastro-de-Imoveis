@@ -19,11 +19,10 @@ void Consulta(tImovel imovel, FILE *arquivo){
 		printf("\t----------------------------------------------------------------------------------\n");
 	}
 	if(imovel.transacao == 1){
-		printf("\t| Imóvel disponivel para ALUGUEL\t\t\t\t\t\t\t |\n");
+		printf("\tImóvel disponivel para ALUGUEL\n");
 	}else if(imovel.transacao == 2){
-		printf("\t| Imóvel disponivel para VENDA\t\t\t\t\t\t\t |\n");
+		printf("\tImóvel disponivel para VENDA\n");
 	}
-	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tTítulo do Imóvel: %s", imovel.titulo);
 	printf("\tEndereço: %s", imovel.rua);
 	printf("\tNúmero: %d\n", imovel.numero);
@@ -147,39 +146,29 @@ void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo){
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t     Imóveis a ALUGUEL por TIPO (Casa, Apartamento, Terreno) \t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
-	printf("\t|\t[1] Casa\t\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t[2] Apartamento\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t[3] Terreno\t\t\t\t\t\t\t\t |\n");
+	printf("\n");
+	printf("\t\t[1] Casa\n");
+	printf("\t\t[2] Apartamento\n");
+	printf("\t\t[3] Terreno\n");
+	printf("\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tDigite sua opção: ");
 	scanf("%d", &tipoImovel);
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(imovel.tipo == tipoImovel && imovel.transacao == 1){
-/*
-			if(imovel.tipo == 1){
-				ConsultaCasa(imovel,arquivo);
-				DescricaoCasa(imovel, arquivo);
-			}else if(imovel.tipo == 2){
-				ConsultaAp(imovel, arquivo);
-				DescricaoApartamento(imovel, arquivo);
-			}else if(imovel.tipo == 3){
-				ConsultaTer(imovel, arquivo);
-				DescricaoApartamento(imovel, arquivo);
-			}
-*/
 			switch(imovel.tipo){
-                case 1:
-                    ConsultaCasa(imovel, arquivo);
-                    DescricaoCasa(imovel, arquivo);
-                    break;
-                case 2:
-                    ConsultaAp(imovel, arquivo);
-                    DescricaoApartamento(imovel, arquivo);
-                    break;
-                case 3:
-                    ConsultaTer(imovel, arquivo);
-                    DescricaoTerreno(imovel, arquivo);
-                    break;
+				case 1:
+					ConsultaCasa(imovel, arquivo);
+					DescricaoCasa(imovel, arquivo);
+					break;
+				case 2:
+					ConsultaAp(imovel, arquivo);
+					DescricaoApartamento(imovel, arquivo);
+					break;
+				case 3:
+					ConsultaTer(imovel, arquivo);
+					DescricaoTerreno(imovel, arquivo);
+					break;
 			}
 
 			count++;
@@ -203,42 +192,30 @@ void ConsultaVendaTipo(tImovel imovel, FILE *arquivo){
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t     Imóveis a VENDA por TIPO (Casa, Apartamento, Terreno) \t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
-	printf("\t|\t[1] Casa\t\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t[2] Apartamento\t\t\t\t\t\t\t\t |\n");
-	printf("\t|\t[3] Terreno\t\t\t\t\t\t\t\t |\n");
+	printf("\n");
+	printf("\t\t[1] Casa\n");
+	printf("\t\t[2] Apartamento\n");
+	printf("\t\t[3] Terreno\n");
+	printf("\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tDigite sua opção: ");
 	scanf("%d", &tipoImovel);
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(imovel.tipo == tipoImovel && imovel.transacao == 2){
-/*
-			if(imovel.tipo == 1){
-				ConsultaCasa(imovel,arquivo);
-				DescricaoCasa(imovel, arquivo);
-			}else if(imovel.tipo == 2){
-				ConsultaAp(imovel, arquivo);
-				DescricaoApartamento(imovel, arquivo);
-			}else if(imovel.tipo == 3){
-				ConsultaTer(imovel, arquivo);
-				DescricaoApartamento(imovel, arquivo);
+			switch(imovel.tipo){
+				case 1:
+					ConsultaCasa(imovel, arquivo);
+					DescricaoCasa(imovel, arquivo);
+					break;
+				case 2:
+					ConsultaAp(imovel, arquivo);
+					DescricaoApartamento(imovel, arquivo);
+					break;
+				case 3:
+					ConsultaTer(imovel, arquivo);
+					DescricaoTerreno(imovel, arquivo);
+					break;
 			}
-*/
-
-            switch(imovel.tipo){
-                case 1:
-                    ConsultaCasa(imovel, arquivo);
-                    DescricaoCasa(imovel, arquivo);
-                    break;
-                case 2:
-                    ConsultaAp(imovel, arquivo);
-                    DescricaoApartamento(imovel, arquivo);
-                    break;
-                case 3:
-                    ConsultaTer(imovel, arquivo);
-                    DescricaoTerreno(imovel, arquivo);
-                    break;
-			}
-
 			count++;
 		}
 

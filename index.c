@@ -57,10 +57,10 @@ int main(int argc, char const *argv[])
 				}
 		}
 		printf("\n\n\t---------------------------- O que deseja fazer agora? ---------------------------\n");
-		printf("\t|\t\t\t\t\t\t\t\t\t\t |\n");
-		printf("\t|\t[1] Voltar ao Menu \t\t\t\t\t\t\t |\n");
-		printf("\t|\t[0] Encerrar Programa \t\t\t\t\t\t\t |\n");
-		printf("\t|\t\t\t\t\t\t\t\t\t\t |\n");
+		printf("\n");
+		printf("\t\t[1] Voltar ao Menu\n");
+		printf("\t\t[0] Encerrar Programa\n");
+		printf("\n");
 		printf("\t----------------------------------------------------------------------------------\n");
 		printf("\tDigite sua opção: ");
 		scanf("%d", &opcao);
