@@ -62,6 +62,7 @@ void CadastroImoveis(tImovel imovel, FILE *arquivo){
     	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\t\tTipo do Imóvel\t\t\t\t |\n");
 	printf("\t----------------------------------------------------------------------------------\n");
+	printf("\n");
 	printf("\t\t[1] Casa\n");
 	printf("\t\t[2] Apartamento\n");
 	printf("\t\t[3] Terreno\n");
