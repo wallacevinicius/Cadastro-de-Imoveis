@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "menu.h"
-#include "cadastro.h"
-#include "clear.h"
+#include "menu.h" /* Biblioteca criada para a função Menu, para exibir as respectivas opções do programa */
+#include "cadastro.h" /* Diretiva que executará o código se a biblioteca CADASTRO_H Não tiver sido definida */
+#include "clear.h" /* Biblioteca criada para a função Clear, para apagar o que tiver escrito no terminal ou cmd */
 
+/*Função criada para seleção Inicial de funcionalidade*/
 int Menu(){
 	int opcao;
 	printf("\n\n\t--------------------------------- Menu Principal ---------------------------------\n");
@@ -20,6 +21,7 @@ int Menu(){
 	return opcao;
 }
 
+/* Função de Menu secundário */
 int MenuConsulta(){
 	Clear();
 	int opcao;
