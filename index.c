@@ -1,3 +1,13 @@
+/*
+	-------------------------------------------------------------------------------------
+	|		CADASTRO DE IMÓVEIS EM C		|
+	|							|
+	| * Primeiro projeto do Laboratório de Programação I 	|
+	| * Desenvolvido por Wallace, Rebeca e Jósion 		|
+	-------------------------------------------------------------------------------------
+	
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -11,21 +21,29 @@ int main(int argc, char const *argv[])
 {
 	setlocale(LC_ALL, "Portuguese");
 
+	//Abertura do arquivo
 	FILE *arquivo;
 	arquivo = fopen("imobiliaria.dat", "a+b");
 	if(!arquivo){
 		printf("Erro ao abrir o arquivo\n");
 	}
 	
-	int opcao = 1, consulta;
+	int opcao = 1, consulta, clear = 0;
 	tImovel imovel;
 
 	while(opcao){
+		//Limpa a tela apenas uma vez quando o programa é executado
+		if(!clear)
+			Clear();
+
+		clear++;
+
 		opcao = Menu();
 
 		if(opcao == 0)
 			break;
 
+		//Menu de opções
 		switch(opcao){
 			case 1:
 				CadastroImoveis(imovel, arquivo);
@@ -67,8 +85,10 @@ int main(int argc, char const *argv[])
 		Clear();
 
 		fseek(arquivo, 0 ,SEEK_SET);
+
 	}
 
+	//Encerramento do arquivo
 	fclose(arquivo);
 
 	return 0;
