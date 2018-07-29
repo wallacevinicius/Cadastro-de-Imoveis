@@ -244,31 +244,19 @@ void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo){
 	StringMaiusculo(bairro, strlen(bairro));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(!strcmp(imovel.bairro, bairro) && imovel.transacao == 1){
-/*
-			if(imovel.tipo == 1){
-				ConsultaCasa(imovel,arquivo);
-				DescricaoCasa(imovel, arquivo);
-			}else if(imovel.tipo == 2){
-				ConsultaAp(imovel, arquivo);
-				DescricaoApartamento(imovel, arquivo);
-			}else if(imovel.tipo == 3){
-				ConsultaTer(imovel, arquivo);
-				DescricaoApartamento(imovel, arquivo);
-			}
-*/
-            switch(imovel.tipo){
-                case 1:
-                    ConsultaCasa(imovel, arquivo);
-                    DescricaoCasa(imovel, arquivo);
-                    break;
-                case 2:
-                    ConsultaAp(imovel, arquivo);
-                    DescricaoApartamento(imovel, arquivo);
-                    break;
-                case 3:
-                    ConsultaTer(imovel, arquivo);
-                    DescricaoTerreno(imovel, arquivo);
-                    break;
+			switch(imovel.tipo){
+				case 1:
+					ConsultaCasa(imovel, arquivo);
+					DescricaoCasa(imovel, arquivo);
+					break;
+				case 2:
+					ConsultaAp(imovel, arquivo);
+					DescricaoApartamento(imovel, arquivo);
+					break;
+				case 3:
+					ConsultaTer(imovel, arquivo);
+					DescricaoTerreno(imovel, arquivo);
+					break;
 			}
 
 			count++;
@@ -299,33 +287,20 @@ void ConsultaVendaBairro(tImovel imovel, FILE *arquivo){
 	StringMaiusculo(bairro, strlen(bairro));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(!strcmp(imovel.bairro, bairro) && imovel.transacao == 2){
-/*
-			if(imovel.tipo == 1){
-				ConsultaCasa(imovel,arquivo);
-				DescricaoCasa(imovel, arquivo);
-			}else if(imovel.tipo == 2){
-				ConsultaAp(imovel, arquivo);
-				DescricaoApartamento(imovel, arquivo);
-			}else if(imovel.tipo == 3){
-				ConsultaTer(imovel, arquivo);
-				DescricaoApartamento(imovel, arquivo);
+			switch(imovel.tipo){
+				case 1:
+					ConsultaCasa(imovel, arquivo);
+					DescricaoCasa(imovel, arquivo);
+					break;
+				case 2:
+					ConsultaAp(imovel, arquivo);
+					DescricaoApartamento(imovel, arquivo);
+					break;
+				case 3:
+					ConsultaTer(imovel, arquivo);
+					DescricaoTerreno(imovel, arquivo);
+					break;
 			}
-*/
-            switch(imovel.tipo){
-                case 1:
-                    ConsultaCasa(imovel, arquivo);
-                    DescricaoCasa(imovel, arquivo);
-                    break;
-                case 2:
-                    ConsultaAp(imovel, arquivo);
-                    DescricaoApartamento(imovel, arquivo);
-                    break;
-                case 3:
-                    ConsultaTer(imovel, arquivo);
-                    DescricaoTerreno(imovel, arquivo);
-                    break;
-			}
-
 			count++;
 		}
 
@@ -354,31 +329,19 @@ void TodosCidade(tImovel imovel, FILE *arquivo){
 	StringMaiusculo(cidade, strlen(cidade));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(!strcmp(imovel.cidade, cidade)){
-/*
-			if(imovel.tipo == 1){
-				ConsultaCasa(imovel,arquivo);
-				DescricaoCasa(imovel, arquivo);
-			}else if(imovel.tipo == 2){
-				ConsultaAp(imovel, arquivo);
-				DescricaoApartamento(imovel, arquivo);
-			}else if(imovel.tipo == 3){
-				ConsultaTer(imovel, arquivo);
-				DescricaoApartamento(imovel, arquivo);
-			}
-*/
-            switch(imovel.tipo){
-                case 1:
-                    ConsultaCasa(imovel, arquivo);
-                    DescricaoCasa(imovel, arquivo);
-                    break;
-                case 2:
-                    ConsultaAp(imovel, arquivo);
-                    DescricaoApartamento(imovel, arquivo);
-                    break;
-                case 3:
-                    ConsultaTer(imovel, arquivo);
-                    DescricaoTerreno(imovel, arquivo);
-                    break;
+			switch(imovel.tipo){
+				case 1:
+					ConsultaCasa(imovel, arquivo);
+					DescricaoCasa(imovel, arquivo);
+					break;
+				case 2:
+					ConsultaAp(imovel, arquivo);
+					DescricaoApartamento(imovel, arquivo);
+					break;
+				case 3:
+					ConsultaTer(imovel, arquivo);
+					DescricaoTerreno(imovel, arquivo);
+					break;
 			}
 
 			count++;
