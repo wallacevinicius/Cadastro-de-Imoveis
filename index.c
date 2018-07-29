@@ -18,9 +18,15 @@ int main(int argc, char const *argv[]){
 	}
 
 	int opcao = 1, consulta;
+	bool clear = FALSE;
+	
 	tImovel imovel;
 
 	while(opcao){
+		if(!clear){
+			Clear();
+			clear = TRUE;
+		}
 		opcao = Menu(); // Chamada da Função Menu
 
 		if(opcao == 0)
