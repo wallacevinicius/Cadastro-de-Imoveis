@@ -12,13 +12,13 @@ int main(int argc, char const *argv[]){
 	setlocale(LC_ALL, "Portuguese");
 
 	FILE *arquivo;
-	arquivo = fopen("imobiliaria.dat", "a+b");
+	arquivo = fopen("database.dat", "a+b");
 	if(!arquivo){
 		printf("Erro ao abrir o arquivo\n");
 	}
 
 	int opcao = 1, consulta;
-	bool clear = FALSE;
+	int clear = FALSE;
 	
 	tImovel imovel;
 

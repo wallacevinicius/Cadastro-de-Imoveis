@@ -128,23 +128,27 @@ void ConsultaTer(tImovel imovel, FILE *arquivo){
 void DescricaoCasa(tImovel imovel, FILE *arquivo){
 	printf("\tNúmero de Quartos: %d\n", imovel.casa.quartos);
 	printf("\tNúmero de Andares: %d\n", imovel.casa.andares);
-	printf("\tÁrea do Terreno: %.2lfm\n", imovel.casa.areaTer);
-	printf("\tÀrea Construida: %.2lfm\n", imovel.casa.areaConst);
+	printf("\tÁrea do Terreno: %.2lfm²\n", imovel.casa.areaTer);
+	printf("\tÀrea Construida: %.2lfm²\n", imovel.casa.areaConst);
 	printf("\t----------------------------------------------------------------------------------\n\n");
 }
 
 void DescricaoApartamento(tImovel imovel, FILE *arquivo){
 	printf("\tPreço do Condomínio: %.2lf\n", imovel.ap.condominio);
 	printf("\tNúmero de Quartos: %d\n", imovel.ap.quartos);
-	printf("\tAndar do Apartamento: %d\n", imovel.ap.andar);
+	if(imovel.ap.andar == 0){
+		printf("\tAndar do Apartamento: TÉRREO\n");
+	}else{
+		printf("\tAndar do Apartamento: %dº\n", imovel.ap.andar);
+	}
 	printf("\tNúmero de Garagens: %d\n", imovel.ap.garagens);
 	printf("\tPosição do Apartamento: %s", imovel.ap.posicao);
-	printf("\tÁrea do Apartamento: %.2lfm\n", imovel.ap.area);
+	printf("\tÁrea do Apartamento: %.2lfm²\n", imovel.ap.area);
 	printf("\t----------------------------------------------------------------------------------\n\n");
 }
 
 void DescricaoTerreno(tImovel imovel, FILE *arquivo){
-	printf("\tÁrea do Terreno: %.2lfm\n", imovel.ter.area);
+	printf("\tÁrea do Terreno: %.2lfm²\n", imovel.ter.area);
 	printf("\t----------------------------------------------------------------------------------\n\n");
 }
 

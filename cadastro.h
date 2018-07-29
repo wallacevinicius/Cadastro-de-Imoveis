@@ -1,6 +1,8 @@
 #ifndef CADASTRO_H /* Diretiva que executará o código se a biblioteca CADASTRO_H Não tiver sido definida */
 #define CADASTRO_H
 #define Qt 60
+#define TRUE 1
+#define FALSE 0
 
 /* Estrutura para informações da Casa */
 typedef struct{
