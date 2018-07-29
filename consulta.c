@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <string.h>
-#include "cadastro.h"
-#include "consulta.h"
-#include "clear.h"
+#include "cadastro.h" /* Biblioteca criada para cadastrar as informacoes de casa, apartamento ou terreno */
+#include "consulta.h" /* Biblioteca criada para mostar as informações cadastradas pelo usuário */
+#include "clear.h" /* Biblioteca criada para a função Clear, para apagar o que tiver escrito no terminal ou cmd */
 
+/* Funçao para Consulta por tipo de Imovel*/
 void Consulta(tImovel imovel, FILE *arquivo){
 	if(imovel.tipo == 1){
 		printf("\n\t----------------------------------------------------------------------------------\n");
@@ -18,6 +19,7 @@ void Consulta(tImovel imovel, FILE *arquivo){
 		printf("\t|\t\t\t\t       Terreno \t\t\t\t\t |\n");
 		printf("\t----------------------------------------------------------------------------------\n");
 	}
+	/* Escolha do tipo de transação que pode ser ser realizada */
 	if(imovel.transacao == 1){
 		printf("\tImóvel disponivel para ALUGUEL\n");
 	}else if(imovel.transacao == 2){
@@ -32,6 +34,7 @@ void Consulta(tImovel imovel, FILE *arquivo){
 	printf("\tPreço: R$ %.2lf\n", imovel.valor);
 }
 
+/* Funçao para Consulta de Todos os Imóveis */
 void TodosImoveis(tImovel imovel, FILE *arquivo){
 	int count = 0;
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
@@ -50,23 +53,24 @@ void TodosImoveis(tImovel imovel, FILE *arquivo){
 	}
 }
 
+/* Funçao para Consulta de Todos os Imóveis por Descrição */
 void TodosImoveisDesc(tImovel imovel, FILE *arquivo){
 	int count = 0;
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		Consulta(imovel, arquivo);
 		switch(imovel.tipo){
 			case 1:
-				DescricaoCasa(imovel, arquivo);
+				DescricaoCasa(imovel, arquivo); // Passando os parâmetros para a função DescricaoCasa
 				break;
 			case 2:
-				DescricaoApartamento(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo); // Passando os parâmetros para a função DescricaoApartamento
 				break;
 			case 3:
-				DescricaoTerreno(imovel, arquivo);
+				DescricaoTerreno(imovel, arquivo); // Passando os parâmetros para a função DescricaoTerreno
 				break;
 		}
 		puts("");
-		count++;
+		count++; // Contador pra indicar o número de imóveis encontrados
 	}
 
 	if(count > 1){
@@ -78,6 +82,7 @@ void TodosImoveisDesc(tImovel imovel, FILE *arquivo){
 	}
 }
 
+/* Funçao para Consultar informações de Casa */
 void ConsultaCasa(tImovel imovel, FILE *arquivo){
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\t\tCasa \t\t\t\t\t |\n");
@@ -91,6 +96,7 @@ void ConsultaCasa(tImovel imovel, FILE *arquivo){
 	printf("\tPreço: R$ %.2lf\n", imovel.valor);
 }
 
+/* Funçao para Consultar informações de Apartamento */
 void ConsultaAp(tImovel imovel, FILE *arquivo){
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\t     Apartamento \t\t\t\t |\n");
@@ -104,6 +110,7 @@ void ConsultaAp(tImovel imovel, FILE *arquivo){
 	printf("\tPreço: R$ %.2lf\n", imovel.valor);
 }
 
+/* Funçao para Consultar informações de Terreno */
 void ConsultaTer(tImovel imovel, FILE *arquivo){
 	printf("\n\t----------------------------------------------------------------------------------\n");
 	printf("\t|\t\t\t\t       Terreno \t\t\t\t\t |\n");
@@ -117,6 +124,7 @@ void ConsultaTer(tImovel imovel, FILE *arquivo){
 	printf("\tPreço: R$ %.2lf\n", imovel.valor);
 }
 
+/* Funçao para Consultar informações de Casa */
 void DescricaoCasa(tImovel imovel, FILE *arquivo){
 	printf("\tNúmero de Quartos: %d\n", imovel.casa.quartos);
 	printf("\tNúmero de Andares: %d\n", imovel.casa.andares);
@@ -140,6 +148,7 @@ void DescricaoTerreno(tImovel imovel, FILE *arquivo){
 	printf("\t----------------------------------------------------------------------------------\n\n");
 }
 
+/* Funçao para Consulta de Aluguel por tipo de Imóvel */
 void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo){
 	Clear();
 	int tipoImovel, count = 0;
@@ -158,23 +167,23 @@ void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo){
 		if(imovel.tipo == tipoImovel && imovel.transacao == 1){
 			switch(imovel.tipo){
 				case 1:
-					ConsultaCasa(imovel, arquivo);
-					DescricaoCasa(imovel, arquivo);
+					ConsultaCasa(imovel, arquivo); // Passando os parâmetros para a função ConsultaCasa
+					DescricaoCasa(imovel, arquivo); // Passando os parâmetros para a função DescricaoCasa
 					break;
 				case 2:
-					ConsultaAp(imovel, arquivo);
-					DescricaoApartamento(imovel, arquivo);
+					ConsultaAp(imovel, arquivo); // Passando os parâmetros para a função ConsultaAp
+					DescricaoApartamento(imovel, arquivo); // Passando os parâmetros para a função DescricaoApartamento
 					break;
 				case 3:
-					ConsultaTer(imovel, arquivo);
-					DescricaoTerreno(imovel, arquivo);
+					ConsultaTer(imovel, arquivo); // Passando os parâmetros para a função ConsultaTer
+					DescricaoTerreno(imovel, arquivo); // Passando os parâmetros para a função DescricaoTerreno
 					break;
 			}
 
-			count++;
+			count++; // Contador para informar o numero de imóveis para Aluguel
 		}
 
-		if(feof(arquivo)) break;
+		if(feof(arquivo)) break; // retorna Não zero se o arquivo chegou ao EOF, caso contrário retorna a zero
 	}
 
 	if(count > 1){
@@ -186,6 +195,7 @@ void ConsultaAluguelTipo(tImovel imovel, FILE *arquivo){
 	}
 }
 
+/* Funçao para Consulta de Venda por tipo de Imóvel */
 void ConsultaVendaTipo(tImovel imovel, FILE *arquivo){
 	Clear();
 	int tipoImovel, count = 0;
@@ -204,22 +214,22 @@ void ConsultaVendaTipo(tImovel imovel, FILE *arquivo){
 		if(imovel.tipo == tipoImovel && imovel.transacao == 2){
 			switch(imovel.tipo){
 				case 1:
-					ConsultaCasa(imovel, arquivo);
-					DescricaoCasa(imovel, arquivo);
+					ConsultaCasa(imovel, arquivo); // Passando os parâmetros para a função ConsultaCasa
+					DescricaoCasa(imovel, arquivo); // Passando os parâmetros para a função DescricaoCasa
 					break;
 				case 2:
-					ConsultaAp(imovel, arquivo);
-					DescricaoApartamento(imovel, arquivo);
+					ConsultaAp(imovel, arquivo); // Passando os parâmetros para a função ConsultaAp
+					DescricaoApartamento(imovel, arquivo); // Passando os parâmetros para a função DescricaoAp
 					break;
 				case 3:
-					ConsultaTer(imovel, arquivo);
-					DescricaoTerreno(imovel, arquivo);
+					ConsultaTer(imovel, arquivo); // Passando os parâmetros para a função ConsultaTer
+					DescricaoTerreno(imovel, arquivo); // Passando os parâmetros para a função DescricaoTerreno
 					break;
 			}
-			count++;
+			count++; // Contador para informar o numero de imóveis para Venda
 		}
 
-		if(feof(arquivo)) break;
+		if(feof(arquivo)) break; // retorna Não zero se o arquivo chegou ao EOF, caso contrário retorna a zero
 	}
 
 	if(count > 1){
@@ -231,6 +241,7 @@ void ConsultaVendaTipo(tImovel imovel, FILE *arquivo){
 	}
 }
 
+/* Funçao para Consulta de Aluguel por Bairro */
 void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo){
 	Clear();
 	int count = 0, tipo;
@@ -244,25 +255,37 @@ void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo){
 	StringMaiusculo(bairro, strlen(bairro));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(!strcmp(imovel.bairro, bairro) && imovel.transacao == 1){
-			switch(imovel.tipo){
-				case 1:
-					ConsultaCasa(imovel, arquivo);
-					DescricaoCasa(imovel, arquivo);
-					break;
-				case 2:
-					ConsultaAp(imovel, arquivo);
-					DescricaoApartamento(imovel, arquivo);
-					break;
-				case 3:
-					ConsultaTer(imovel, arquivo);
-					DescricaoTerreno(imovel, arquivo);
-					break;
+/*
+			if(imovel.tipo == 1){
+				ConsultaCasa(imovel,arquivo);
+				DescricaoCasa(imovel, arquivo);
+			}else if(imovel.tipo == 2){
+				ConsultaAp(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}else if(imovel.tipo == 3){
+				ConsultaTer(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}
+*/
+            switch(imovel.tipo){
+                case 1:
+                    ConsultaCasa(imovel, arquivo); // Passando os parâmetros para a função ConsultaCasa
+                    DescricaoCasa(imovel, arquivo); // Passando os parâmetros para a função DescricaoCasa
+                    break;
+                case 2:
+                    ConsultaAp(imovel, arquivo); // Passando os parâmetros para a função DescricaoAp
+                    DescricaoApartamento(imovel, arquivo); // Passando os parâmetros para a função DescricaoApartamento
+                    break;
+                case 3:
+                    ConsultaTer(imovel, arquivo); // Passando os parâmetros para a função DescricaoTer
+                    DescricaoTerreno(imovel, arquivo); // Passando os parâmetros para a função DescricaoTerreno
+                    break;
 			}
 
-			count++;
+			count++; // Contador para informar o numero de imóveis para Aluguel por Bairro
 		}
 
-		if(feof(arquivo)) break;
+		if(feof(arquivo)) break; // retorna Não zero se o arquivo chegou ao EOF, caso contrário retorna a zero
 	}
 
 	if(count > 1){
@@ -274,6 +297,7 @@ void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo){
 	}
 }
 
+/* Funçao para Consulta de Venda por Bairro */
 void ConsultaVendaBairro(tImovel imovel, FILE *arquivo){
 	Clear();
 	int count = 0, tipo;
@@ -287,24 +311,37 @@ void ConsultaVendaBairro(tImovel imovel, FILE *arquivo){
 	StringMaiusculo(bairro, strlen(bairro));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(!strcmp(imovel.bairro, bairro) && imovel.transacao == 2){
-			switch(imovel.tipo){
-				case 1:
-					ConsultaCasa(imovel, arquivo);
-					DescricaoCasa(imovel, arquivo);
-					break;
-				case 2:
-					ConsultaAp(imovel, arquivo);
-					DescricaoApartamento(imovel, arquivo);
-					break;
-				case 3:
-					ConsultaTer(imovel, arquivo);
-					DescricaoTerreno(imovel, arquivo);
-					break;
+/*
+			if(imovel.tipo == 1){
+				ConsultaCasa(imovel,arquivo);
+				DescricaoCasa(imovel, arquivo);
+			}else if(imovel.tipo == 2){
+				ConsultaAp(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}else if(imovel.tipo == 3){
+				ConsultaTer(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
 			}
-			count++;
+*/
+            switch(imovel.tipo){
+                case 1:
+                    ConsultaCasa(imovel, arquivo); // Passando os parâmetros para a função ConsultaCasa
+                    DescricaoCasa(imovel, arquivo); // Passando os parâmetros para a função DescricaoCasa
+                    break;
+                case 2:
+                    ConsultaAp(imovel, arquivo); // Passando os parâmetros para a função ConsultaAp
+                    DescricaoApartamento(imovel, arquivo); // Passando os parâmetros para a função DescricaoApartamento
+                    break;
+                case 3:
+                    ConsultaTer(imovel, arquivo); // Passando os parâmetros para a função ConsultaTer
+                    DescricaoTerreno(imovel, arquivo); // Passando os parâmetros para a função DescricaoTerreno
+                    break;
+			}
+
+			count++; // Contador para informar o numero de imóveis para Venda por Bairro
 		}
 
-		if(feof(arquivo)) break;
+		if(feof(arquivo)) break; // retorna Não zero se o arquivo chegou ao EOF, caso contrário retorna a zero
 	}
 
 	if(count > 1){
@@ -316,6 +353,7 @@ void ConsultaVendaBairro(tImovel imovel, FILE *arquivo){
 	}
 }
 
+/* Funçao para Consulta de Todos imóveis por Cidade*/
 void TodosCidade(tImovel imovel, FILE *arquivo){
 	Clear();
 	int count = 0, tipo;
@@ -329,25 +367,37 @@ void TodosCidade(tImovel imovel, FILE *arquivo){
 	StringMaiusculo(cidade, strlen(cidade));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
 		if(!strcmp(imovel.cidade, cidade)){
-			switch(imovel.tipo){
-				case 1:
-					ConsultaCasa(imovel, arquivo);
-					DescricaoCasa(imovel, arquivo);
-					break;
-				case 2:
-					ConsultaAp(imovel, arquivo);
-					DescricaoApartamento(imovel, arquivo);
-					break;
-				case 3:
-					ConsultaTer(imovel, arquivo);
-					DescricaoTerreno(imovel, arquivo);
-					break;
+/*
+			if(imovel.tipo == 1){
+				ConsultaCasa(imovel,arquivo);
+				DescricaoCasa(imovel, arquivo);
+			}else if(imovel.tipo == 2){
+				ConsultaAp(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}else if(imovel.tipo == 3){
+				ConsultaTer(imovel, arquivo);
+				DescricaoApartamento(imovel, arquivo);
+			}
+*/
+            switch(imovel.tipo){
+                case 1:
+                    ConsultaCasa(imovel, arquivo); // Passando os parâmetros para a função ConsultaCasa
+                    DescricaoCasa(imovel, arquivo); // Passando os parâmetros para a função DescricaoCasa
+                    break;
+                case 2:
+                    ConsultaAp(imovel, arquivo); // Passando os parâmetros para a função ConsultaAp
+                    DescricaoApartamento(imovel, arquivo); // Passando os parâmetros para a função DescricaoApartamento
+                    break;
+                case 3:
+                    ConsultaTer(imovel, arquivo); // Passando os parâmetros para a função ConsultaTer
+                    DescricaoTerreno(imovel, arquivo); // Passando os parâmetros para a função DescricaoTerreno
+                    break;
 			}
 
-			count++;
+			count++; // Contador para informar o numero de todos imóveis por cidade
 		}
 
-		if(feof(arquivo)) break;
+		if(feof(arquivo)) break; // retorna Não zero se o arquivo chegou ao EOF, caso contrário retorna a zero
 	}
 
 	if(count > 1){

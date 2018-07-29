@@ -1,6 +1,6 @@
-#ifndef CLEAR_H
+#ifndef CLEAR_H /* Diretiva que executará o código se a biblioteca CLEAR_H Não tiver sido definida */
 #define CLEAR_H
 
-void Clear();
+void Clear(); // Chamada da Função Clear
 
-#endif
+#endif /* Encerrando Diretiva CLEAR_H */

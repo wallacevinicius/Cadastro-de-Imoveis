@@ -1,76 +1,64 @@
-/*
-	-------------------------------------------------------------------------------------
-	|		CADASTRO DE IMÓVEIS EM C		|
-	|							|
-	| * Primeiro projeto do Laboratório de Programação I 	|
-	| * Desenvolvido por Wallace, Rebeca e Jósion 		|
-	-------------------------------------------------------------------------------------
-	
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
+#include <locale.h> /* Incluindo a biblioteca para a acentuação */
 #include <string.h>
-#include "menu.h"
-#include "cadastro.h"
-#include "consulta.h"
-#include "clear.h"
+#include "menu.h" /* Biblioteca criada para a função Menu, para exibir as respectivas opções do programa */
+#include "cadastro.h" /* Diretiva que executará o código se a biblioteca CADASTRO_H Não tiver sido definida */
+#include "consulta.h" /* Biblioteca criada para mostar as informações cadastradas pelo usuário */
+#include "clear.h" /* Biblioteca criada para a função Clear, para apagar o que tiver escrito no terminal ou cmd */
 
-int main(int argc, char const *argv[])
-{
+/* Acesso a linha de comando*/
+int main(int argc, char const *argv[]){
 	setlocale(LC_ALL, "Portuguese");
 
-	//Abertura do arquivo
 	FILE *arquivo;
 	arquivo = fopen("imobiliaria.dat", "a+b");
 	if(!arquivo){
 		printf("Erro ao abrir o arquivo\n");
 	}
+
+	int opcao = 1, consulta;
+	bool clear = FALSE;
 	
-	int opcao = 1, consulta, clear = 0;
 	tImovel imovel;
 
 	while(opcao){
-		//Limpa a tela apenas uma vez quando o programa é executado
-		if(!clear)
+		if(!clear){
 			Clear();
-
-		clear++;
-
-		opcao = Menu();
+			clear = TRUE;
+		}
+		opcao = Menu(); // Chamada da Função Menu
 
 		if(opcao == 0)
 			break;
 
-		//Menu de opções
 		switch(opcao){
 			case 1:
-				CadastroImoveis(imovel, arquivo);
+				CadastroImoveis(imovel, arquivo); // Passando os parâmetros para a função CasdastroImoveis
 				break;
 			case 2:
-				consulta = MenuConsulta();
+				consulta = MenuConsulta(); // Chamada de Função MenuConsulta
 				switch(consulta){
 					case 1:
-						TodosImoveis(imovel, arquivo);
+						TodosImoveis(imovel, arquivo); // Passando os parâmetros para a função TodosImoveis
 						break;
 					case 2:
-						TodosImoveisDesc(imovel, arquivo);
+						TodosImoveisDesc(imovel, arquivo); // Passando os parâmetros para a função TodosImoveisDesc
 						break;
 					case 3:
-						ConsultaVendaTipo(imovel, arquivo);
+						ConsultaVendaTipo(imovel, arquivo); // Passando os parâmetros para a função ConsultaVendaTipo
 						break;
 					case 4:
-						ConsultaAluguelTipo(imovel, arquivo);
+						ConsultaAluguelTipo(imovel, arquivo); // Passando os parâmetros para a função ConsultaAluguelTipo
 						break;
 					case 5:
-						ConsultaVendaBairro(imovel, arquivo);
+						ConsultaVendaBairro(imovel, arquivo); // Passando os parâmetros para a função ConsultaVendaBairro
 						break;
 					case 6:
-						ConsultaAluguelBairro(imovel, arquivo);
+						ConsultaAluguelBairro(imovel, arquivo); // Passando os parâmetros para a função ConsultaAluguelBairro
 						break;
 					case 7:
-						TodosCidade(imovel, arquivo);
+						TodosCidade(imovel, arquivo); // Passando os parâmetros para a função TodosCidade
 						break;
 				}
 		}
@@ -84,11 +72,9 @@ int main(int argc, char const *argv[])
 		scanf("%d", &opcao);
 		Clear();
 
-		fseek(arquivo, 0 ,SEEK_SET);
-
+		fseek(arquivo, 0 ,SEEK_SET); //faz procuras e acessos randomicos em arquivos
 	}
 
-	//Encerramento do arquivo
 	fclose(arquivo);
 
 	return 0;
