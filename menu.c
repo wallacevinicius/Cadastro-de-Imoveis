@@ -10,9 +10,9 @@ int Menu(){
 	int opcao;
 	printf("\n\n\t--------------------------------- Menu Principal ---------------------------------\n");
 	printf("\n");
-	printf("\t\t[1] Cadastrar Imóvel \t\t\t\t\t\t\t \n");
-	printf("\t\t[2] Consultar Imóvel \t\t\t\t\t\t\t \n");
-	printf("\t\t[0] Encerrar Programa \t\t\t\t\t\t\t \n");
+	printf("\t\t[1] Cadastrar Imóvel\n");
+	printf("\t\t[2] Consultar Imóvel\n");
+	printf("\t\t[0] Encerrar Programa\n");
 	printf("\n");
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\tDigite sua opção: ");

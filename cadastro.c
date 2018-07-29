@@ -16,6 +16,7 @@ void StringMaiusculo(char frase[], size_t tamanho){
 }
 
 void CadastroImoveis(tImovel imovel, FILE *arquivo){
+	int lastID;
 	Clear();
 	printf("\t----------------------------------------------------------------------------------\n");
 	printf("\t\t\t\t\t Informações do Imóvel\n");

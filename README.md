@@ -13,7 +13,7 @@ $ ./exe
 ### Como compilar no Windows
 
 ```sh
-Você pode usar qualquer IDE disponível para Windows, basta abrir todos os arquivos .c e logo em seguida ir ao arquivo index.c e executar o programa.
+Você pode usar qualquer IDE disponível para Windows, basta adicionar todos os arquivos .c em um projeto e logo em seguida ir ao arquivo index.c e executar o programa.
 ```
 
 
