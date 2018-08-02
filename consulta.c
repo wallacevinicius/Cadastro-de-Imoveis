@@ -260,7 +260,7 @@ void ConsultaAluguelBairro(tImovel imovel, FILE *arquivo){
 	fgets(bairro, Qt, stdin);
 	StringMaiusculo(bairro, strlen(bairro));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
-		if(!strcmp(imovel.bairro, bairro) && imovel.transacao == 1){
+		if(!strncmp(imovel.bairro, bairro, strlen(bairro)-1) && imovel.transacao == 1){
 			switch(imovel.tipo){
 				case 1:
 					ConsultaCasa(imovel, arquivo); // Passando os parâmetros para a função ConsultaCasa
@@ -304,7 +304,7 @@ void ConsultaVendaBairro(tImovel imovel, FILE *arquivo){
 	fgets(bairro, Qt, stdin);
 	StringMaiusculo(bairro, strlen(bairro));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
-		if(!strcmp(imovel.bairro, bairro) && imovel.transacao == 2){
+		if(!strncmp(imovel.bairro, bairro, strlen(bairro)-1) && imovel.transacao == 2){
 			switch(imovel.tipo){
 				case 1:
 					ConsultaCasa(imovel, arquivo); // Passando os parâmetros para a função ConsultaCasa
@@ -348,7 +348,7 @@ void TodosCidade(tImovel imovel, FILE *arquivo){
 	fgets(cidade, Qt, stdin);
 	StringMaiusculo(cidade, strlen(cidade));
 	while(fread(&imovel, sizeof(tImovel), 1, arquivo)){
-		if(!strcmp(imovel.cidade, cidade)){
+		if(!strncmp(imovel.cidade, cidade, strlen(cidade)-1)){
 			switch(imovel.tipo){
 				case 1:
 					ConsultaCasa(imovel, arquivo); // Passando os parâmetros para a função ConsultaCasa
